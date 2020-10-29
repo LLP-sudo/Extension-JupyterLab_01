@@ -25,16 +25,31 @@ const extension: JupyterFrontEndPlugin<void> = {
     const { commands } = app;
 
     // Add a command
-    const command = 'Exodus-interface';
+    const command = 'Python function';
+    const command2 = 'Lysp function'
+
+
     //adiciona um comando ao clickar no menu
     commands.addCommand(command, {
       //nome subm-menu
-      label: 'Funções em Python!',
+      label: 'Funções em Python',
       caption: 'Funções em Python',
       //Comando do click
       execute: (args: any) => {
         window.alert(
           `Chamada de Input para funções Python`
+        );
+      }
+    });
+
+    commands.addCommand(command2, {
+      //nome subm-menu
+      label: 'Funções em Lysp',
+      caption: 'Funções em Lysp',
+      //Comando do click
+      execute: (args: any) => {
+        window.alert(
+          `Chamada de Input para funções Lysp`
         );
       }
     });
@@ -48,6 +63,12 @@ const extension: JupyterFrontEndPlugin<void> = {
       args: { origin: 'from the palette' }
     });
 
+    palette.addItem({
+      command: command2,
+      category,
+      args: {}
+    });
+
 
     // Create a menu
     const Exodus: Menu = new Menu({ commands });
@@ -57,6 +78,7 @@ const extension: JupyterFrontEndPlugin<void> = {
 
     // Add the command to the menu
     Exodus.addItem({ command, args: { origin: 'from the menu' } });
+    Exodus.addItem({ command:command2, args: { origin: 'from the menu' } });
 
   }
 
