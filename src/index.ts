@@ -5,11 +5,12 @@ import {
 } from '@jupyterlab/application';
 
 //imports para desenvolver menu
+
 import { IMainMenu } from '@jupyterlab/mainmenu';
 
 import { Menu } from '@lumino/widgets';
 
-import { ICommandPalette } from '@jupyterlab/apputils';
+import { ICommandPalette, InputDialog } from '@jupyterlab/apputils';
 
 // informações da extensão
 const extension: JupyterFrontEndPlugin<void> = {
@@ -27,6 +28,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     // Add a command
     const command = 'Python function';
     const command2 = 'Lysp function'
+    let input
 
 
     //adiciona um comando ao clickar no menu
@@ -36,9 +38,15 @@ const extension: JupyterFrontEndPlugin<void> = {
       caption: 'Funções em Python',
       //Comando do click
       execute: (args: any) => {
-        window.alert(
-          `Chamada de Input para funções Python`
-        );
+        
+        input =  InputDialog.getText({ title: 'Teste input' }).then(value => {
+          console.log('Valor ' + value.value);
+        });
+
+        console.log(input);
+        
+
+
       }
     });
 
