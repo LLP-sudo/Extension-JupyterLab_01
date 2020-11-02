@@ -40,18 +40,47 @@ const extension: JupyterFrontEndPlugin<void> = {
       label: 'Funções em Python',
       caption: 'Funções em Python',
       //Comando do click
-      execute: (args: any) => {     
+      execute: (args: any) => {    
 
-        let btn =  document.createElement("button")
-        btn.innerText = "BUtÃo!!!!2#@!"
-        btn.className = "btn";
-
+        //fundo opaco do modal
         let div = document.createElement("div");
-        div.className = "modal"
+        div.className = "fundo"
+
+        let modal = document.createElement("div");
+        modal.className = "modal"
+        div.appendChild(modal)
+
+        let modalHeader = document.createElement("div");
+        modalHeader.className = "modalHeader"
+        modal.appendChild(modalHeader)
+
+        let title = document.createElement("h2");
+        title.innerText = "Exodus"
+        title.className = "title"
+        modalHeader.appendChild(title)
+
+        let label = document.createElement("label")
+        label.innerText = "Insira a função:"
+        label.className = "label"
+        modal.appendChild(label)
+
         let input = document.createElement("input");
         input.className = "input"
-        div.appendChild(input)
-        div.appendChild(btn)
+        modal.appendChild(input)
+
+        let labelText = document.createElement("label")
+        labelText.innerText = "Insira os parametro separados por ;"
+        labelText.className = "label"
+        modal.appendChild(labelText)
+
+        let textarea = document.createElement("textarea");
+        textarea.className = "input"
+        modal.appendChild(textarea)
+
+        let btn =  document.createElement("button")
+        btn.innerText = "Selecionar"
+        btn.className = "btn";
+        modal.appendChild(btn)
 
 
        
