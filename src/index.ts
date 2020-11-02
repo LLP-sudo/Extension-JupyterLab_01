@@ -10,7 +10,10 @@ import { IMainMenu } from '@jupyterlab/mainmenu';
 
 import { Menu } from '@lumino/widgets';
 
-import { ICommandPalette, InputDialog } from '@jupyterlab/apputils';
+import { ICommandPalette } from '@jupyterlab/apputils';
+
+import '../style/index.css'
+
 
 // informações da extensão
 const extension: JupyterFrontEndPlugin<void> = {
@@ -28,7 +31,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     // Add a command
     const command = 'Python function';
     const command2 = 'Lysp function'
-    let input
+
 
 
     //adiciona um comando ao clickar no menu
@@ -37,15 +40,24 @@ const extension: JupyterFrontEndPlugin<void> = {
       label: 'Funções em Python',
       caption: 'Funções em Python',
       //Comando do click
-      execute: (args: any) => {
-        
-        input =  InputDialog.getText({ title: 'Teste input' }).then(value => {
-          console.log('Valor ' + value.value);
-        });
+      execute: (args: any) => {     
 
-        console.log(input);
-        
+        let btn =  document.createElement("button")
+        btn.innerText = "BUtÃo!!!!2#@!"
+        btn.className = "btn";
 
+        let div = document.createElement("div");
+        div.className = "modal"
+        let input = document.createElement("input");
+        input.className = "input"
+        div.appendChild(input)
+        div.appendChild(btn)
+
+
+       
+        document.getElementsByTagName('body')[0].appendChild(div);
+        //document.getElementsByTagName('body')[0].appendChild(modal);
+           
 
       }
     });
@@ -61,7 +73,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         );
       }
     });
-   
+
 
     // Add the command to the command palette
     const category = 'Extension Exodus';
@@ -86,7 +98,7 @@ const extension: JupyterFrontEndPlugin<void> = {
 
     // Add the command to the menu
     Exodus.addItem({ command, args: { origin: 'from the menu' } });
-    Exodus.addItem({ command:command2, args: { origin: 'from the menu' } });
+    Exodus.addItem({ command: command2, args: { origin: 'from the menu' } });
 
   }
 
