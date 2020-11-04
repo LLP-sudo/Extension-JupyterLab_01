@@ -15,6 +15,22 @@ import { ICommandPalette } from '@jupyterlab/apputils';
 import '../style/index.css'
 
 
+//função para pegar valor das inputs
+function getValue():void {
+  let input: string;
+  let textarea: string;
+  let modal: HTMLElement;
+
+  input = (document.getElementById("funcao") as HTMLInputElement).value
+  textarea = (document.getElementById("param")as HTMLInputElement).value
+  modal = document.getElementById("fundo")
+
+  alert(input)
+  alert(textarea)
+  modal.remove()
+  
+}
+
 // informações da extensão
 const extension: JupyterFrontEndPlugin<void> = {
   id: 'Exodus',
@@ -45,6 +61,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         //fundo opaco do modal
         let div = document.createElement("div");
         div.className = "fundo"
+        div.id = "fundo"
 
         let modal = document.createElement("div");
         modal.className = "modal"
@@ -66,6 +83,7 @@ const extension: JupyterFrontEndPlugin<void> = {
 
         let input = document.createElement("input");
         input.className = "input"
+        input.id = "funcao";
         modal.appendChild(input)
 
         let labelText = document.createElement("label")
@@ -75,11 +93,13 @@ const extension: JupyterFrontEndPlugin<void> = {
 
         let textarea = document.createElement("textarea");
         textarea.className = "input"
+        textarea.id = "param";
         modal.appendChild(textarea)
 
         let btn =  document.createElement("button")
         btn.innerText = "Selecionar"
         btn.className = "btn";
+        btn.onclick = getValue;
         modal.appendChild(btn)
 
 
