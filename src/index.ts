@@ -12,24 +12,13 @@ import { Menu } from '@lumino/widgets';
 
 import { ICommandPalette } from '@jupyterlab/apputils';
 
-import '../style/index.css'
+import Modal from './Modal'
 
+//import '../style/index.css'
 
-//função para pegar valor das inputs
-function getValue():void {
-  let input: string;
-  let textarea: string;
-  let modal: HTMLElement;
+// instancia o modal
+let modal = new Modal()
 
-  input = (document.getElementById("funcao") as HTMLInputElement).value
-  textarea = (document.getElementById("param")as HTMLInputElement).value
-  modal = document.getElementById("fundo")
-
-  alert(input)
-  alert(textarea)
-  modal.remove()
-  
-}
 
 // informações da extensão
 const extension: JupyterFrontEndPlugin<void> = {
@@ -58,55 +47,8 @@ const extension: JupyterFrontEndPlugin<void> = {
       //Comando do click
       execute: (args: any) => {    
 
-        //fundo opaco do modal
-        let div = document.createElement("div");
-        div.className = "fundo"
-        div.id = "fundo"
-
-        let modal = document.createElement("div");
-        modal.className = "modal"
-        div.appendChild(modal)
-
-        let modalHeader = document.createElement("div");
-        modalHeader.className = "modalHeader"
-        modal.appendChild(modalHeader)
-
-        let title = document.createElement("h2");
-        title.innerText = "Exodus"
-        title.className = "title"
-        modalHeader.appendChild(title)
-
-        let label = document.createElement("label")
-        label.innerText = "Insira a função:"
-        label.className = "label"
-        modal.appendChild(label)
-
-        let input = document.createElement("input");
-        input.className = "input"
-        input.id = "funcao";
-        modal.appendChild(input)
-
-        let labelText = document.createElement("label")
-        labelText.innerText = "Insira os parametro separados por ;"
-        labelText.className = "label"
-        modal.appendChild(labelText)
-
-        let textarea = document.createElement("textarea");
-        textarea.className = "input"
-        textarea.id = "param";
-        modal.appendChild(textarea)
-
-        let btn =  document.createElement("button")
-        btn.innerText = "Selecionar"
-        btn.className = "btn";
-        btn.onclick = getValue;
-        modal.appendChild(btn)
-
-
-       
-        document.getElementsByTagName('body')[0].appendChild(div);
-        //document.getElementsByTagName('body')[0].appendChild(modal);
-           
+        modal.creatModal();
+      
 
       }
     });
