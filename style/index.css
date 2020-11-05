@@ -1,0 +1,58 @@
+.fundo {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal {
+    width: 50vh;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: rgb(255, 248, 248);
+    margin: 0;
+    padding: 0;
+}
+
+.modalHeader {
+    width: 50vh;
+    text-align: center;
+    font-size: 14px;
+    background-color: #00BFFF;
+    color: aliceblue;
+    margin-top: 0;
+    padding: 0;
+}
+
+.title {
+    margin-top: 0;
+    padding: 0;
+    border-radius: 6px;
+}
+
+.btn {
+    background-color: #00BFFF;
+    padding-top: 10px;
+    position: relative;
+    border-radius: 4px;
+    display: block;
+}
+
+.input {
+    position: relative;
+    display: block;
+    margin: 5px;
+}
+
+.label {
+    margin: 5px;
+}
