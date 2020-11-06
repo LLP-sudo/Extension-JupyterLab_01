@@ -12,24 +12,26 @@ import { Menu } from '@lumino/widgets';
 
 import { ICommandPalette } from '@jupyterlab/apputils';
 
-import Modal from './Modal'
+import { INotebookTracker, NotebookActions } from "@jupyterlab/notebook";
 
-//import '../style/index.css'
+import Modal from './Modal'
 
 // instancia o modal
 let modal = new Modal()
+
 
 
 // informações da extensão
 const extension: JupyterFrontEndPlugin<void> = {
   id: 'Exodus',
   autoStart: true,
-  requires: [ICommandPalette, IMainMenu],
+  requires: [ICommandPalette, IMainMenu, INotebookTracker],
   //função executada ao cliclar na extensão
   activate: (
     app: JupyterFrontEnd,
     palette: ICommandPalette,
-    mainMenu: IMainMenu
+    mainMenu: IMainMenu,
+    notebookTracker: INotebookTracker | null
   ) => {
     const { commands } = app;
 
@@ -38,6 +40,8 @@ const extension: JupyterFrontEndPlugin<void> = {
     const command2 = 'Lysp function'
 
 
+    //Notebook
+
 
     //adiciona um comando ao clickar no menu
     commands.addCommand(command, {
@@ -45,10 +49,14 @@ const extension: JupyterFrontEndPlugin<void> = {
       label: 'Funções em Python',
       caption: 'Funções em Python',
       //Comando do click
-      execute: (args: any) => {    
+      execute: (args: any) => {
 
         modal.creatModal();
-      
+        const current = notebookTracker.currentWidget;
+        const notebook = current.content;
+        NotebookActions.insertBelow(notebook);
+        const activeCell = notebook.activeCell;
+        activeCell.model.value.text = "a + b";
 
       }
     });
