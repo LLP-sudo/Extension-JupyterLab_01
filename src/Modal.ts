@@ -1,4 +1,5 @@
 
+import {Notebook } from '@jupyterlab/notebook';
 import '../style/index.css'
 
 export default class Modal {
@@ -11,8 +12,15 @@ export default class Modal {
     labelInput: HTMLElement
     modalTBox: HTMLElement
     labelTBox: HTMLElement
-    valueInput: string
-    valueTBox: string
+    valueInput: string;
+    valueTBox: string;
+    notebook: Notebook;
+    activeCell: any
+
+    constructor(notebook: Notebook){
+        this.notebook = notebook;
+        this.activeCell = this.notebook.activeCell;
+    }
 
     creatModal() {
         //fundo opaco do modal
@@ -75,20 +83,18 @@ export default class Modal {
     }
 
 
-    getValue() {
+
+    getValue(): void {
         this.valueInput = (document.getElementById("funcao") as HTMLInputElement).value
         this.valueTBox = (document.getElementById("param") as HTMLInputElement).value
+               
         
-        alert(this.valueInput)
-        alert(this.valueTBox)
+        this.activeCell.model.value.text = this.valueInput
 
         document.getElementById("fundo").remove()
         
 
     }
-
-
-
 
 
 }

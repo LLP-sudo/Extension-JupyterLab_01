@@ -1,10 +1,8 @@
-//Imports padrão para desenvolver nova extenssão
+//Imports----------------------------------------------------------------------------------// 
 import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-
-//imports para desenvolver menu
 
 import { IMainMenu } from '@jupyterlab/mainmenu';
 
@@ -15,80 +13,72 @@ import { ICommandPalette } from '@jupyterlab/apputils';
 import { INotebookTracker, NotebookActions } from "@jupyterlab/notebook";
 
 import Modal from './Modal'
+//------------------------------------------------------------------------------------------//
 
-// instancia o modal
-let modal = new Modal()
-
-
-
-// informações da extensão
+//Objeto da extensão
 const extension: JupyterFrontEndPlugin<void> = {
   id: 'Exodus',
   autoStart: true,
   requires: [ICommandPalette, IMainMenu, INotebookTracker],
-  //função executada ao cliclar na extensão
-  activate: (
-    app: JupyterFrontEnd,
+  activate: (                                                     //Arrow function da extensão, a execução parte dessa função.
+    app: JupyterFrontEnd,                                         //objetos passados como parametros
     palette: ICommandPalette,
     mainMenu: IMainMenu,
     notebookTracker: INotebookTracker | null
   ) => {
-    const { commands } = app;
-
-    // Add a command
-    const command = 'Python function';
-    const command2 = 'Lysp function'
 
 
-    //Notebook
+    //Declaração de objetos 
+    const { commands } = app;                                     // objetos dentro do pacote JupyterFrontEnd
 
+    //Declaração de comandos
+    const command = 'UniVariada';
 
-    //adiciona um comando ao clickar no menu
+    //Definição do comando 
     commands.addCommand(command, {
-      //nome subm-menu
-      label: 'Funções em Python',
-      caption: 'Funções em Python',
-      //Comando do click
+      label: 'UniVariada',
+      caption: 'UniVariada',
       execute: (args: any) => {
 
-        modal.creatModal();
+
+        //Verificação: existe um notebook aberto?
+
+        if(notebookTracker.currentWidget !== null){
+
         const current = notebookTracker.currentWidget;
         const notebook = current.content;
+        let modal = new Modal(notebook)
         NotebookActions.insertBelow(notebook);
+        modal.creatModal();
+
+         /* NotebookActions.insertBelow(notebook);
         const activeCell = notebook.activeCell;
-        activeCell.model.value.text = "a + b";
+        activeCell.model.value.text = "a + b"; */
+
+        }
+        else{
+
+          window.alert("A extensão não pode ser usada se não houver um notbook aberto!");
+          
+        }
+
+        
+
+       
 
       }
     });
 
-    commands.addCommand(command2, {
-      //nome subm-menu
-      label: 'Funções em Lysp',
-      caption: 'Funções em Lysp',
-      //Comando do click
-      execute: (args: any) => {
-        window.alert(
-          `Chamada de Input para funções Lysp`
-        );
-      }
-    });
+    
 
-
-    // Add the command to the command palette
+    // Adicionando comados para o palette
     const category = 'Extension Exodus';
     palette.addItem({
       command,
       category,
       args: { origin: 'from the palette' }
     });
-
-    palette.addItem({
-      command: command2,
-      category,
-      args: {}
-    });
-
-
+    
     // Create a menu
     const Exodus: Menu = new Menu({ commands });
     //nome menu principal
@@ -97,11 +87,8 @@ const extension: JupyterFrontEndPlugin<void> = {
 
     // Add the command to the menu
     Exodus.addItem({ command, args: { origin: 'from the menu' } });
-    Exodus.addItem({ command: command2, args: { origin: 'from the menu' } });
 
   }
-
-
 
 };
 
