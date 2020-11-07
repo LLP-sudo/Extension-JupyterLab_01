@@ -10,7 +10,7 @@ import { Menu } from '@lumino/widgets';
 
 import { ICommandPalette } from '@jupyterlab/apputils';
 
-import { INotebookTracker, NotebookActions } from "@jupyterlab/notebook";
+import { INotebookTracker } from "@jupyterlab/notebook";
 
 import Modal from './Modal'
 //------------------------------------------------------------------------------------------//
@@ -27,7 +27,6 @@ const extension: JupyterFrontEndPlugin<void> = {
     notebookTracker: INotebookTracker | null
   ) => {
 
-
     //Declaração de objetos 
     const { commands } = app;                                     // objetos dentro do pacote JupyterFrontEnd
 
@@ -40,15 +39,13 @@ const extension: JupyterFrontEndPlugin<void> = {
       caption: 'UniVariada',
       execute: (args: any) => {
 
-
         //Verificação: existe um notebook aberto?
 
-        if(notebookTracker.currentWidget !== null){
+        if(notebookTracker.currentWidget !== null) {
 
         const current = notebookTracker.currentWidget;
         const notebook = current.content;
         let modal = new Modal(notebook)
-        NotebookActions.insertBelow(notebook);
         modal.creatModal();
 
          /* NotebookActions.insertBelow(notebook);
@@ -56,21 +53,17 @@ const extension: JupyterFrontEndPlugin<void> = {
         activeCell.model.value.text = "a + b"; */
 
         }
-        else{
+        else {
 
           window.alert("A extensão não pode ser usada se não houver um notbook aberto!");
-          
+
         }
 
-        
-
-       
-
       }
+
     });
 
     
-
     // Adicionando comados para o palette
     const category = 'Extension Exodus';
     palette.addItem({
