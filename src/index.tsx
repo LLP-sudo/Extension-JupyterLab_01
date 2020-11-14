@@ -12,7 +12,12 @@ import { ICommandPalette } from '@jupyterlab/apputils';
 
 import { INotebookTracker } from "@jupyterlab/notebook";
 
-import Modal from './Modal'
+import React from 'react'
+
+import ReactDom from 'react-dom'
+
+import {UserInterface} from './Modal'
+
 //------------------------------------------------------------------------------------------//
 
 //Objeto da extensão
@@ -45,12 +50,12 @@ const extension: JupyterFrontEndPlugin<void> = {
 
         const current = notebookTracker.currentWidget;
         const notebook = current.content;
-        let modal = new Modal(notebook)
-        modal.creatModal();
-
-         /* NotebookActions.insertBelow(notebook);
-        const activeCell = notebook.activeCell;
-        activeCell.model.value.text = "a + b"; */
+       
+        let modal = document.createElement("div");
+          modal.id = "Modal";
+          
+          document.getElementsByTagName('body')[0].appendChild(modal);;
+          ReactDom.render( <UserInterface ative={true} notebook={notebook} />, document.getElementById('Modal'))
 
         }
         else {
