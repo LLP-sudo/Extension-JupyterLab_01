@@ -16,7 +16,7 @@ import React from 'react'
 
 import ReactDom from 'react-dom'
 
-import {UserInterface} from './Modal'
+import UserInterface from './Modal2'
 
 //------------------------------------------------------------------------------------------//
 
@@ -55,7 +55,7 @@ const extension: JupyterFrontEndPlugin<void> = {
           modal.id = "Modal";
           
           document.getElementsByTagName('body')[0].appendChild(modal);;
-          ReactDom.render( <UserInterface ative={true} notebook={notebook} />, document.getElementById('Modal'))
+          ReactDom.render( <UserInterface  notebook={notebook} />, document.getElementById('Modal'))
 
         }
         else {
